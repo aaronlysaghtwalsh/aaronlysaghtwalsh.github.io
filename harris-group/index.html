@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harris Group: automotive data and Power BI | Aaron Lysaght Walsh</title>
+  <meta name="description" content="Case study: Aaron Lysaght Walsh's data science internship at Harris Group, covering Power BI reporting, inventory analysis and an approved recommendation to consolidate reporting data.">
+  <link rel="canonical" href="https://aaronlysaghtwalsh.github.io/harris-group/">
+  <meta name="theme-color" content="#F6F4EF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121418" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Harris Group: automotive data and Power BI | Aaron Lysaght Walsh">
+  <meta property="og:description" content="Case study: Aaron Lysaght Walsh's data science internship at Harris Group, covering Power BI reporting, inventory analysis and an approved recommendation to consolidate reporting data.">
+  <meta property="og:url" content="https://aaronlysaghtwalsh.github.io/harris-group/">
+  <meta property="og:image" content="https://aaronlysaghtwalsh.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../assets/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="wordmark" href="../">Aaron Lysaght Walsh</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="../getmeajob/">GetMeAJob</a></li>
+          <li><a href="../harris-group/" aria-current="page">Harris Group</a></li>
+          <li><a href="../ucd-research/">Research</a></li>
+          <li><a href="../about/">About</a></li>
+          <li><a href="../contact/">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero wrap" aria-labelledby="page-title">
+      <p class="feature__meta"><span class="chip">Internship</span> <span class="feature__kind">Harris Group, Dublin, March–July 2024</span></p>
+      <h1 id="page-title">Turning automotive data into business insight</h1>
+      <div class="page-hero__lede">
+        <p>As a Data Science Intern at Harris Group, I analyzed automotive inventory, sales and vehicle movement data, built Power BI reporting, and presented findings to the Managing Director and senior leaders. One recommendation, about the data foundations behind the reporting, was approved and implemented.</p>
+      </div>
+      <p class="page-hero__sub">Original dashboards, data and internal reports are confidential, so they aren't shown. This case study describes the work and what I learned from it.</p>
+    </section>
+
+    <div class="wrap">
+      <div class="case">
+        <aside class="case__rail" aria-label="Project facts">
+          <dl class="rail-facts">
+            <div><dt>Role</dt><dd>Data Science Intern</dd></div>
+            <div><dt>Where</dt><dd>Harris Group, Dublin, Ireland</dd></div>
+            <div><dt>When</dt><dd>March–July 2024</dd></div>
+            <div><dt>Tools</dt><dd>Power BI, Excel, data modeling</dd></div>
+            <div><dt>Data</dt><dd>Datasets of up to about 300,000 rows</dd></div>
+            <div><dt>Audience</dt><dd>Managing Director, executives and department heads</dd></div>
+          </dl>
+          <nav class="rail-nav" aria-label="On this page">
+            <p>On this page</p>
+            <ol>
+              <li><a href="#context">The business context</a></li>
+              <li><a href="#work">What I worked on</a></li>
+              <li><a href="#approach">How I approached it</a></li>
+              <li><a href="#recommendation">The recommendation</a></li>
+              <li><a href="#stakeholders">Working with senior leaders</a></li>
+              <li><a href="#lessons">What I learned</a></li>
+            </ol>
+          </nav>
+        </aside>
+
+        <div class="case__main">
+          <section id="context" class="case-section">
+            <h2>The business context</h2>
+            <p>Harris Group operates in the automotive industry, where knowing what stock you hold, where it sits and how fast it moves matters to operational performance.</p>
+            <p>Sales and inventory information lived in several different reporting sources. That made a consistent view of the business harder to get, and it raised practical questions: which stock was moving, which wasn't, how stock compared with demand in each region, and when to replenish.</p>
+          </section>
+
+          <section id="work" class="case-section">
+            <h2>What I worked on</h2>
+            <div class="grid-2">
+              <div>
+                <h3>Power BI reporting</h3>
+                <p>Dashboards and reports giving visibility into stock levels, sales activity and vehicle movement, plus extra reports for specific management questions.</p>
+              </div>
+              <div>
+                <h3>Dead stock</h3>
+                <p>Identified slow-moving automotive parts with no recorded sales for 180 days or more, highlighting inventory that warranted management attention.</p>
+              </div>
+              <div>
+                <h3>Regional allocation</h3>
+                <p>Compared sales activity and stock distribution across regions, including electric and diesel vehicles, to inform discussions about where vehicles should go.</p>
+              </div>
+              <div>
+                <h3>Replenishment and safety stock</h3>
+                <p>Looked at historical usage and supplier lead times to support decisions about stock thresholds and replenishment.</p>
+              </div>
+            </div>
+            <p>Why this matters commercially: stock that doesn't move ties up working capital and space, while too little stock means missed sales. The aim was to give managers a clearer view of both.</p>
+          </section>
+
+          <section id="approach" class="case-section">
+            <h2>How I approached it</h2>
+            <p>Each piece of work followed roughly the same path, starting from the business question rather than the dashboard:</p>
+            <ol class="flow" aria-label="How I approached each analysis">
+              <li><strong>Understand the question</strong><span>Find out what decision the request was really meant to support.</span></li>
+              <li><strong>Gather and prepare the data</strong><span>Pull the relevant information together from the different reporting sources and clean it.</span></li>
+              <li><strong>Model and measure</strong><span>Organize it into metrics that answer the question.</span></li>
+              <li><strong>Build the view</strong><span>A Power BI dashboard or report that people could explore.</span></li>
+              <li><strong>Present and follow up</strong><span>Walk leaders through what it shows, and answer the follow-up questions.</span></li>
+            </ol>
+            <p class="flow-caption">An illustration of how I approached the work, not a Harris Group deliverable.</p>
+          </section>
+
+          <section id="recommendation" class="case-section">
+            <h2>The recommendation that was approved</h2>
+            <p>Working across fragmented sources made every analysis slower and less consistent. So alongside the dashboards, I made a recommendation about the data itself.</p>
+            <div class="grid-3">
+              <div><p class="label">What I found</p><h3>Fragmented reporting</h3><p>Related sales and inventory information was spread across several sources, which made consistent reporting harder.</p></div>
+              <div><p class="label">What I recommended</p><h3>Consolidate and remodel</h3><p>Combine the relevant sources and use a star-schema model: one central table of records linked to lookup tables such as product, region and date.</p></div>
+              <div><p class="label">What happened</p><h3>Approved and merged</h3><p>The recommendation was approved, the relevant reporting sources were merged, and the dashboards were then used in leadership reviews.</p></div>
+            </div>
+            <p>My part was identifying the problem, making the case for the change and supporting the move to more consistent reporting data. The lesson I took from it: good analytics depends as much on a reliable data foundation as on the visuals built on top.</p>
+          </section>
+
+          <section id="stakeholders" class="case-section">
+            <h2>Working with senior leaders</h2>
+            <p>Much of the internship involved the Managing Director, executives and department heads. That meant:</p>
+            <ul class="bullets">
+              <li>turning ad hoc requests into the real business question behind them;</li>
+              <li>explaining findings in plain language to non-technical leaders;</li>
+              <li>connecting technical recommendations to operational priorities;</li>
+              <li>presenting dashboard outputs and responding to follow-up questions.</li>
+            </ul>
+          </section>
+
+          <section id="lessons" class="case-section">
+            <h2>What I learned</h2>
+            <div class="grid-2">
+              <div><h3>Start with the business question</h3><p>Understand the operational problem before reaching for a dashboard.</p></div>
+              <div><h3>Structure matters</h3><p>How data is organized decides how consistent and maintainable the reporting can be.</p></div>
+              <div><h3>Communication counts as much as technique</h3><p>Leaders need to know why an insight matters and what decision it informs.</p></div>
+              <div><h3>Context changes the reading</h3><p>Inventory numbers mean more when read against availability, regional demand and working capital.</p></div>
+            </div>
+            <p class="table-note">No figures for savings, revenue or efficiency gains have been independently verified, so this case study doesn't claim any.</p>
+            <a class="next-link" href="../ucd-research/"><span>Next project</span><strong>UCD Research: does giving people control change how they feel about a platform?</strong></a>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <p class="site-footer__name">Aaron Lysaght Walsh <span>Chicago, IL</span></p>
+      <ul class="site-footer__links">
+        <li><a href="mailto:ajlw02@icloud.com">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/aaron-lysaght-walsh" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/aaronlysaghtwalsh" rel="noopener">GitHub</a></li>
+      </ul>
+      <p class="site-footer__credit">Site designed and developed with Claude. © 2026</p>
+    </div>
+  </footer>
+
+  <dialog class="lightbox" aria-label="Full-size image">
+    <form method="dialog" class="lightbox__bar">
+      <p class="lightbox__caption"></p>
+      <button class="lightbox__close" type="submit">Close</button>
+    </form>
+    <div class="lightbox__scroll">
+      <img class="lightbox__img" src="" alt="">
+    </div>
+  </dialog>
+
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

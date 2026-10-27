@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UCD Research: user control and sense of agency | Aaron Lysaght Walsh</title>
+  <meta name="description" content="Case study: Aaron Lysaght Walsh's final-year HCI research at University College Dublin, a 47-participant experiment on how user control and transparency affect sense of agency.">
+  <link rel="canonical" href="https://aaronlysaghtwalsh.github.io/ucd-research/">
+  <meta name="theme-color" content="#F6F4EF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121418" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="UCD Research: user control and sense of agency | Aaron Lysaght Walsh">
+  <meta property="og:description" content="Case study: Aaron Lysaght Walsh's final-year HCI research at University College Dublin, a 47-participant experiment on how user control and transparency affect sense of agency.">
+  <meta property="og:url" content="https://aaronlysaghtwalsh.github.io/ucd-research/">
+  <meta property="og:image" content="https://aaronlysaghtwalsh.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../assets/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="wordmark" href="../">Aaron Lysaght Walsh</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="../getmeajob/">GetMeAJob</a></li>
+          <li><a href="../harris-group/">Harris Group</a></li>
+          <li><a href="../ucd-research/" aria-current="page">Research</a></li>
+          <li><a href="../about/">About</a></li>
+          <li><a href="../contact/">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero wrap" aria-labelledby="page-title">
+      <p class="feature__meta"><span class="chip">Completed</span> <span class="feature__kind">Final-year research, University College Dublin, 2025</span></p>
+      <h1 id="page-title">Does giving people control change how they feel about a platform?</h1>
+      <div class="page-hero__lede">
+        <p>For my final-year project, I built two versions of a short-form video app and ran a controlled experiment to see how user control and transparency affect people's sense of agency, trust, satisfaction and awareness of time.</p>
+      </div>
+      <p class="page-hero__sub">Dissertation title: <em>Examining the Impact of User Control and Automated Features on Sense of Agency in Short Form Entertainment Platforms</em>.</p>
+    </section>
+
+    <div class="wrap">
+      <div class="case">
+        <aside class="case__rail" aria-label="Project facts">
+          <dl class="rail-facts">
+            <div><dt>Project</dt><dd>BSc final-year project, UCD School of Computer Science</dd></div>
+            <div><dt>Year</dt><dd>2025</dd></div>
+            <div><dt>Supervisor</dt><dd>Prof. David Coyle</dd></div>
+            <div><dt>Design</dt><dd>Between-subjects experiment with random assignment</dd></div>
+            <div><dt>Participants</dt><dd>47 completed the study (75 began the initial survey)</dd></div>
+            <div><dt>Built with</dt><dd>Bubble.io, Google Forms</dd></div>
+            <div><dt>Analysis</dt><dd>Python: pandas, NumPy, SciPy, matplotlib, seaborn</dd></div>
+          </dl>
+          <nav class="rail-nav" aria-label="On this page">
+            <p>On this page</p>
+            <ol>
+              <li><a href="#question">The question</a></li>
+              <li><a href="#built">What I built</a></li>
+              <li><a href="#method">How I ran the study</a></li>
+              <li><a href="#findings">What I found</a></li>
+              <li><a href="#meaning">What it means</a></li>
+              <li><a href="#limits">Limitations</a></li>
+            </ol>
+          </nav>
+        </aside>
+
+        <div class="case__main">
+          <section id="question" class="case-section">
+            <h2>The question</h2>
+            <p>Short-form video platforms rely on autoplay, endless scrolling and recommendations that don't explain themselves. They're designed to maximize viewing time, and many users feel they watch longer than they meant to.</p>
+            <p>I wanted to know whether giving people visible controls, and explaining why each video was recommended, would change how in control they felt, how much they trusted the platform, and how they behaved.</p>
+            <figure class="plate plate--figure plate--chart">
+              <img src="../assets/img/ucd-research/fig-7.1-watched-longer-than-intended.webp" width="563" height="303" loading="lazy" decoding="async"
+                   alt="Bar chart: how often respondents feel they watch longer than intended. Never 0%, rarely 1.3%, sometimes 9.2%, often 51.3%, always 38.3%.">
+              <figcaption><span class="fig">Fig. 7.1</span> Before the experiment, about nine in ten survey respondents said they often or always watch longer than intended. This chart covers everyone who took the initial survey, not only the 47 who completed the study.</figcaption>
+            </figure>
+          </section>
+
+          <section id="built" class="case-section">
+            <h2>What I built</h2>
+            <p>Two versions of the same app showed the same hand-picked set of videos, shuffled randomly, so the only difference was the interface:</p>
+            <div class="grid-2">
+              <div><h3>High control</h3><p>Autoplay off by default with an on/off toggle, a genre filter, a visible session timer, and an explanation of why each video was recommended.</p></div>
+              <div><h3>Low control</h3><p>Videos autoplay in an endless loop, with no timer, no filter and no explanations, much like popular short-form apps.</p></div>
+            </div>
+            <div class="figure-pair">
+              <figure class="plate plate--figure">
+            <img src="../assets/img/ucd-research/fig-5.2-high-control-interface.webp" width="312" height="380" loading="lazy" decoding="async" alt="High-control video interface with a session timer, category filter, autoplay on/off toggle, Next Video button and a labeled row of recommended videos.">
+            <figcaption><span class="fig">Fig. 5.2</span> The high-control interface: session timer, category filter, autoplay toggle and labeled recommendations.</figcaption>
+          </figure>
+              <figure class="plate plate--figure">
+            <img src="../assets/img/ucd-research/fig-5.3-low-control-interface-titles-blurred.webp" width="323" height="379" loading="lazy" decoding="async" alt="Low-control video interface with a playing video, a Next Video button and unlabeled recommended videos; video titles are blurred.">
+            <figcaption><span class="fig">Fig. 5.3</span> The low-control interface: no timer, filter or explanations. Third-party video titles have been blurred in this version of the figure.</figcaption>
+          </figure>
+            </div>
+            <p>I built it in Bubble.io, a no-code platform, and worked around its free-tier limits. Bubble can't rewrite an embedded player while it runs, so I used two parallel players (autoplay on and off) and switched between them. YouTube blocks autoplay with sound, so autoplaying videos started muted. Every click was logged against an anonymous participant ID.</p>
+          </section>
+
+          <section id="method" class="case-section">
+            <h2>How I ran the study</h2>
+            <p>Each participant took part remotely, in a session of about 15 minutes: consent, a short survey about their viewing habits, random assignment to one version of the app, ten minutes of viewing with every click recorded, and a final survey on agency, trust, satisfaction and time awareness.</p>
+            <p>A pilot with 6 people exposed three problems before launch: a survey section people didn't scroll to, a button whose clicks weren't being logged, and confusion about the session length. All three were fixed. I chose the statistical tests in advance, matching each to whether the data was normally distributed, and checked that the survey scales were reliable (Cronbach's α of 0.76 and 0.87).</p>
+            <figure class="plate plate--figure">
+              <img src="../assets/img/ucd-research/fig-6.1-experiment-workflow.webp" width="823" height="748" loading="lazy" decoding="async" style="width:480px"
+                   alt="Flow diagram: consent, pre-experiment survey, random assignment to high- or low-control environment, 10-minute session, transition page, post-experiment survey, completion page.">
+              <figcaption><span class="fig">Fig. 6.1</span> The participant workflow, from consent to completion.</figcaption>
+            </figure>
+          </section>
+
+          <section id="findings" class="case-section">
+            <h2>What I found</h2>
+            <p>The headline: people using the high-control version reported a significantly greater sense of agency, but they didn't behave measurably differently. All results, including the ones that weren't significant:</p>
+            <ul class="results">
+              <li><p>Participants using the high-control interface reported a <strong>greater sense of agency</strong> than those using the low-control interface.</p><p class="stat">Independent-samples t-test: t = 2.36, p = .023</p><span class="verdict chip chip--yes">Significant</span></li>
+              <li><p><strong>Clicking behavior</strong> (next-video clicks, recommendation clicks and their total) showed no significant difference between the two groups.</p><p class="stat">Mann–Whitney U: p = .641, .229 and .991</p><span class="verdict chip">Not significant</span></li>
+              <li><p>People who felt more in control also <strong>trusted the recommendations more</strong> and were more satisfied.</p><p class="stat">Pearson r = 0.61, p &lt; .001 (correlation)</p><span class="verdict chip chip--yes">Significant</span></li>
+              <li><p>Understanding <strong>why videos were recommended</strong> was strongly associated with sense of agency, accounting for 44% of its variation.</p><p class="stat">Spearman ρ = 0.66; regression R² = 0.44, p &lt; .001</p><span class="verdict chip chip--yes">Significant</span></li>
+              <li><p>Higher agency went with <strong>better awareness of time</strong> spent on the platform.</p><p class="stat">Spearman ρ = 0.43, p = .003</p><span class="verdict chip chip--yes">Significant</span></li>
+              <li><p>Agency was not linked to whether time <strong>felt faster or slower</strong> than expected.</p><p class="stat">Spearman ρ = −0.24, p = .12</p><span class="verdict chip">Not significant</span></li>
+              <li><p>After adjusting for each participant's <strong>baseline sense of agency</strong>, neither the interface nor baseline agency significantly predicted agency after the session.</p><p class="stat">ANCOVA: F = 2.26, p = .10 (model explained 14.2% of variance)</p><span class="verdict chip">Not significant</span></li>
+            </ul>
+            <figure class="plate plate--figure plate--chart">
+              <img src="../assets/img/ucd-research/fig-7.11-perceived-agency-by-condition.webp" width="449" height="276" loading="lazy" decoding="async"
+                   alt="Box plot of agency composite scores: the high-control group's median is around 3.6 and the low-control group's around 2.8, with overlapping whiskers.">
+              <figcaption><span class="fig">Fig. 7.11</span> Perceived agency by interface. Median scores were about 3.6 (high control) and 2.8 (low control) on a five-point scale.</figcaption>
+            </figure>
+            <h3>How to read these results</h3>
+            <p>The simple comparison between the two groups found a statistically significant difference in perceived agency. Once each person's starting point was taken into account, the difference was no longer statistically significant. Taken together, the result is encouraging but not conclusive with 47 participants, and a larger study would be needed to confirm it.</p>
+            <p>The links between agency, trust, transparency and time awareness are correlations. They show that these things go together, not that one causes the other.</p>
+          </section>
+
+          <section id="meaning" class="case-section">
+            <h2>What it means beyond video apps</h2>
+            <p>The clearest lesson is that engagement numbers alone can miss how people feel about a product: the two groups clicked about the same, but they reported different experiences. For any product team, that's an argument for measuring perceptions as well as behavior.</p>
+            <p>The dissertation suggests lightweight changes platforms could test: "Why am I seeing this?" labels beside recommendations, an autoplay setting that remembers the user's choice, and gentle reminders of time spent. The same idea, that transparency supports trust, sits at the heart of <a href="../getmeajob/">GetMeAJob</a>.</p>
+          </section>
+
+          <section id="limits" class="case-section">
+            <h2>Limitations</h2>
+            <ul class="bullets">
+              <li><strong>Sample.</strong> 47 participants, mainly university students, so the results may not hold for older or less tech-savvy users.</li>
+              <li><strong>Session length.</strong> Ten minutes captures first impressions, not long-term habits.</li>
+              <li><strong>Self-reported measures.</strong> Survey answers can be affected by what people think they should say.</li>
+              <li><strong>Setting.</strong> Remote and unsupervised; autoplay was muted and the feed was shuffled rather than personalized.</li>
+              <li><strong>Statistical power.</strong> Enough to detect medium effects, but likely not smaller ones.</li>
+            </ul>
+            <p class="table-note">A public version of the full dissertation will be added once it has been reviewed.</p>
+            <a class="next-link" href="../about/"><span>Next</span><strong>About me</strong></a>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <p class="site-footer__name">Aaron Lysaght Walsh <span>Chicago, IL</span></p>
+      <ul class="site-footer__links">
+        <li><a href="mailto:ajlw02@icloud.com">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/aaron-lysaght-walsh" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/aaronlysaghtwalsh" rel="noopener">GitHub</a></li>
+      </ul>
+      <p class="site-footer__credit">Site designed and developed with Claude. © 2026</p>
+    </div>
+  </footer>
+
+  <dialog class="lightbox" aria-label="Full-size image">
+    <form method="dialog" class="lightbox__bar">
+      <p class="lightbox__caption"></p>
+      <button class="lightbox__close" type="submit">Close</button>
+    </form>
+    <div class="lightbox__scroll">
+      <img class="lightbox__img" src="" alt="">
+    </div>
+  </dialog>
+
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

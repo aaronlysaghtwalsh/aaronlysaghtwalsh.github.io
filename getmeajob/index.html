@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GetMeAJob: an AI job-application engine | Aaron Lysaght Walsh</title>
+  <meta name="description" content="Case study: GetMeAJob, an AI job-application engine Aaron Lysaght Walsh specified and directed, built with Claude around one rule: every claim must trace back to evidence.">
+  <link rel="canonical" href="https://aaronlysaghtwalsh.github.io/getmeajob/">
+  <meta name="theme-color" content="#F6F4EF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121418" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="GetMeAJob: an AI job-application engine | Aaron Lysaght Walsh">
+  <meta property="og:description" content="Case study: GetMeAJob, an AI job-application engine Aaron Lysaght Walsh specified and directed, built with Claude around one rule: every claim must trace back to evidence.">
+  <meta property="og:url" content="https://aaronlysaghtwalsh.github.io/getmeajob/">
+  <meta property="og:image" content="https://aaronlysaghtwalsh.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../assets/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="wordmark" href="../">Aaron Lysaght Walsh</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="../getmeajob/" aria-current="page">GetMeAJob</a></li>
+          <li><a href="../harris-group/">Harris Group</a></li>
+          <li><a href="../ucd-research/">Research</a></li>
+          <li><a href="../about/">About</a></li>
+          <li><a href="../contact/">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero wrap" aria-labelledby="page-title">
+      <p class="feature__meta"><span class="chip chip--progress">In development</span> <span class="feature__kind">GetMeAJob, independent AI project, 2026</span></p>
+      <h1 id="page-title">An AI <span class="nowrap">job-application</span> engine that won't make things up</h1>
+      <div class="page-hero__lede">
+        <p>I conceived, specified and directed GetMeAJob, an AI application that helps a job seeker produce strong, tailored applications without inventing anything. Claude designed the architecture and wrote the code.</p>
+      </div>
+      <p class="page-hero__sub">This page covers the problem, the product decisions I made, what happened when I used it on my own job search, and where it stands today.</p>
+    </section>
+
+    <div class="wrap">
+      <div class="case">
+        <aside class="case__rail" aria-label="Project facts">
+          <dl class="rail-facts">
+            <div><dt>My role</dt><dd>Product owner and designer</dd></div>
+            <div><dt>Built by</dt><dd>Claude (Anthropic): architecture, all source code and automated tests</dd></div>
+            <div><dt>Status</dt><dd>Working Phase 1 prototype, running locally. Not a production product; no external users.</dd></div>
+            <div><dt>Phase 1 built</dt><dd>October 2026</dd></div>
+            <div><dt>Code</dt><dd><a href="https://github.com/aaronlysaghtwalsh/GetMeAJob" rel="noopener">github.com/aaronlysaghtwalsh/GetMeAJob</a><br>Public to view; all rights reserved</dd></div>
+          </dl>
+          <nav class="rail-nav" aria-label="On this page">
+            <p>On this page</p>
+            <ol>
+              <li><a href="#problem">The problem</a></li>
+              <li><a href="#roles">My role and Claude's</a></li>
+              <li><a href="#how">How it works</a></li>
+              <li><a href="#trust">Designing for trust</a></li>
+              <li><a href="#judgment">Judgment before documents</a></li>
+              <li><a href="#real-use">Using it for real</a></li>
+              <li><a href="#status">Status and limitations</a></li>
+            </ol>
+          </nav>
+        </aside>
+
+        <div class="case__main">
+          <section id="problem" class="case-section">
+            <h2>The problem</h2>
+            <p>A serious job application takes real work: analyzing the role, researching the company, tailoring a resume, writing a cover letter and answering screening questions. AI can make that faster, but generic tools tend to produce generic material, and sometimes they invent experience the applicant doesn't have.</p>
+            <p>When I wrote the requirements, I set out the problems the product had to solve:</p>
+            <ul class="bullets">
+              <li><strong>Fabrication.</strong> The tool must never invent experience, skills, metrics, titles or dates.</li>
+              <li><strong>Scattered information.</strong> Several resumes can describe the same person differently, and the tool has to reconcile them.</li>
+              <li><strong>Optimizing for software instead of people.</strong> Tuning a resume for applicant tracking systems (ATS) shouldn't make it worse for the recruiter reading it.</li>
+              <li><strong>Wasted effort.</strong> Sometimes the honest answer is "don't apply," and the tool should be willing to say so.</li>
+            </ul>
+            <h3>Why I started it</h3>
+            <p>I started GetMeAJob while navigating my own job search after moving to Chicago. I realized that creating a strong application involved much more than rewriting a resume. It meant understanding the company, assessing whether a role genuinely suited my experience, and presenting that experience accurately.</p>
+            <p>AI could help with that process, but I didn't want it inventing qualifications or making decisions on my behalf. So I set out to design a tool that prioritizes evidence, transparency and human judgment.</p>
+          </section>
+
+          <section id="roles" class="case-section">
+            <h2>My role and Claude's</h2>
+            <p>I defined what the product is and the rules it must follow. Claude decided how to build it and built it.</p>
+            <div class="table-wrap">
+              <table class="data-table">
+                <caption>Who did what on GetMeAJob</caption>
+                <thead><tr><th scope="col">Area</th><th scope="col">Me</th><th scope="col">Claude</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Problem and vision</th><td data-label="Me">Identified the problem and defined the product as an AI career agent, not a resume builder</td><td data-label="Claude" class="empty">None</td></tr>
+                  <tr><th scope="row">Requirements</th><td data-label="Me">Wrote the requirements document: 34 requirement areas, the minimum product and a five-phase plan</td><td data-label="Claude" class="empty">None</td></tr>
+                  <tr><th scope="row">Product rules</th><td data-label="Me">The evidence-integrity rule, four evidence categories, human approval of everything, never submitting on the applicant's behalf, respecting job sites' terms, and permission to say "don't apply"</td><td data-label="Claude">Turned these rules into enforceable mechanisms: evidence IDs, a validator, an approval gate and guardrails</td></tr>
+                  <tr><th scope="row">Workflow</th><td data-label="Me">Defined the core journey, from uploading resumes to a tracked, approved application</td><td data-label="Claude">Designed the data model and the processing pipeline behind it</td></tr>
+                  <tr><th scope="row">Architecture and code</th><td data-label="Me">Set constraints: separate data for each user, no dependence on a single AI provider, security priorities</td><td data-label="Claude">Chose the technology stack, designed the architecture and wrote all of the source code and automated tests</td></tr>
+                  <tr><th scope="row">Testing in practice</th><td data-label="Me">Ran it on my own job search, which surfaced a real limit in the AI provider's API</td><td data-label="Claude">Fixed the resulting test-compatibility problem and added a regression test</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="table-note">The application is written in TypeScript with React, Node.js and SQLite. That code is Claude's work, so I don't present it as evidence of my own programming skills.</p>
+          </section>
+
+          <section id="how" class="case-section">
+            <h2>How it works</h2>
+            <p>The applicant uploads their resumes once. GetMeAJob merges them into a single profile, called the Career Brain, in which every fact keeps a link to the document or answer it came from. Each new job then runs through the same pipeline:</p>
+            <ol class="flow" aria-label="The per-job pipeline">
+              <li><strong>Job intelligence</strong><span>Paste a job description, or import it from a supported job board link. The role is broken into numbered requirements.</span></li>
+              <li><strong>Company research</strong><span>Web research with citations, sorted into facts, interpretations and hypotheses.</span></li>
+              <li><strong>Fit analysis</strong><span>Each requirement is matched to evidence. The AI judges each match; code calculates the scores.</span><em class="branch">Can stop here with "do not apply"</em></li>
+              <li><strong>Strategy</strong><span>How to position the applicant, what to lead with and what to play down, before any document is written.</span></li>
+              <li><strong>Documents</strong><span>Resume, cover letter and answers to the application questions, all generated from the strategy.</span></li>
+              <li><strong>Integrity check</strong><span>Every number and tool is checked against cited evidence. A failing line gets one repair attempt, then it's removed and reported.</span></li>
+              <li><strong>Review and approval</strong><span>The applicant reviews, edits and approves everything. Nothing is ever submitted automatically.</span></li>
+            </ol>
+            <p class="flow-caption">Drawn from the project's own architecture documentation.</p>
+            <h3>Four principles behind the design</h3>
+            <div class="grid-2">
+              <div><h4>Strategy before documents</h4><p>Documents follow a stored strategy, not the raw job description.</p></div>
+              <div><h4>Evidence over prose</h4><p>Every claim cites an evidence item, and code checks it against the source.</p></div>
+              <div><h4>Code where it can be certain</h4><p>Names, titles, employers, dates and scores come from records and calculations. The AI chooses and phrases.</p></div>
+              <div><h4>The applicant approves</h4><p>Everything is a draft until a person approves it, and the app never submits anything.</p></div>
+            </div>
+          </section>
+
+          <section id="trust" class="case-section">
+            <h2>Designing for trust</h2>
+            <p>The hardest product question wasn't what the AI should write. It was how to stop it writing things that aren't true, without making the tool useless. The answer was to treat evidence as a first-class object:</p>
+            <ul class="bullets">
+              <li>Each fact is labeled <em>verified</em>, <em>provided by you</em>, <em>inferred</em> or <em>unsupported</em>. Only the first two can appear in an application.</li>
+              <li>When two resumes disagree, the app asks the applicant instead of guessing.</li>
+              <li>Generated and edited text is checked for numbers and known tools that the evidence doesn't support. Approval is blocked while problems remain.</li>
+              <li>Answers about work authorization, salary or legal matters need an explicit "I checked this" confirmation.</li>
+            </ul>
+            <p class="gallery-note">Screenshots show a fictional applicant and simulated AI output. Any scores shown come from test data, not real-world results.</p>
+            <div class="gallery">
+              <figure class="plate">
+            <button class="plate__open" type="button" data-lightbox="../assets/img/getmeajob/04-career-brain-full.webp" data-lightbox-alt="Full screenshot: Career Brain profile with a readiness checklist and evidence items labeled Verified." data-lightbox-caption="The Career Brain. Full screenshot. Fictional applicant and simulated AI output.">
+              <img src="../assets/img/getmeajob/04-career-brain-focus-900.webp" srcset="../assets/img/getmeajob/04-career-brain-focus-900.webp 900w, ../assets/img/getmeajob/04-career-brain-focus-1600.webp 1600w" sizes="(min-width: 1000px) 440px, 100vw"
+                   width="1600" height="1697" loading="lazy" decoding="async" alt="Career Brain profile with a readiness checklist and evidence items labeled Verified.">
+              <span class="plate__hint">View full screenshot</span>
+            </button>
+            <figcaption><span class="fig">Fig. 2</span> <strong>The Career Brain.</strong> Several resumes merged into one profile; each fact labeled with where it came from (&quot;Verified&quot; and &quot;2 sources&quot;).</figcaption>
+          </figure>
+              <figure class="plate">
+            <button class="plate__open" type="button" data-lightbox="../assets/img/getmeajob/05-conflict-question-full.webp" data-lightbox-alt="Full screenshot: A question card showing two conflicting end dates with one-tap answers." data-lightbox-caption="Asks instead of guessing. Full screenshot. Fictional applicant and simulated AI output.">
+              <img src="../assets/img/getmeajob/05-conflict-question-focus-900.webp" srcset="../assets/img/getmeajob/05-conflict-question-focus-900.webp 900w, ../assets/img/getmeajob/05-conflict-question-focus-1600.webp 1600w" sizes="(min-width: 1000px) 440px, 100vw"
+                   width="1600" height="1009" loading="lazy" decoding="async" alt="A question card showing two conflicting end dates with one-tap answers.">
+              <span class="plate__hint">View full screenshot</span>
+            </button>
+            <figcaption><span class="fig">Fig. 3</span> <strong>Asks instead of guessing.</strong> Two resumes disagree on a date, so the app asks the applicant.</figcaption>
+          </figure>
+              <figure class="plate">
+            <button class="plate__open" type="button" data-lightbox="../assets/img/getmeajob/01-resume-integrity-full.webp" data-lightbox-alt="Full screenshot: Tailored resume for a fictional applicant beside an integrity panel listing a removed skill and an automatically fixed number." data-lightbox-caption="Every claim traces back to evidence. Full screenshot. Fictional applicant and simulated AI output.">
+              <img src="../assets/img/getmeajob/01-resume-integrity-focus-900.webp" srcset="../assets/img/getmeajob/01-resume-integrity-focus-900.webp 900w, ../assets/img/getmeajob/01-resume-integrity-focus-1600.webp 1600w" sizes="(min-width: 1000px) 440px, 100vw"
+                   width="1600" height="1077" loading="lazy" decoding="async" alt="Tailored resume for a fictional applicant beside an integrity panel listing a removed skill and an automatically fixed number.">
+              <span class="plate__hint">View full screenshot</span>
+            </button>
+            <figcaption><span class="fig">Fig. 4</span> <strong>Every claim traces back to evidence.</strong> The tailored resume's integrity panel shows an unsupported skill (&quot;Salesforce&quot;) removed and an embellished number fixed automatically.</figcaption>
+          </figure>
+              <figure class="plate">
+            <button class="plate__open" type="button" data-lightbox="../assets/img/getmeajob/07-sensitive-answer-full.webp" data-lightbox-alt="Full screenshot: Dialog asking the applicant to confirm a sensitive application answer." data-lightbox-caption="The human stays in control. Full screenshot. Fictional applicant and simulated AI output.">
+              <img src="../assets/img/getmeajob/07-sensitive-answer-focus-900.webp" srcset="../assets/img/getmeajob/07-sensitive-answer-focus-900.webp 900w, ../assets/img/getmeajob/07-sensitive-answer-focus-1600.webp 1600w" sizes="(min-width: 1000px) 440px, 100vw"
+                   width="1600" height="988" loading="lazy" decoding="async" alt="Dialog asking the applicant to confirm a sensitive application answer.">
+              <span class="plate__hint">View full screenshot</span>
+            </button>
+            <figcaption><span class="fig">Fig. 5</span> <strong>The human stays in control.</strong> Answers about work authorization or salary need explicit confirmation before approval.</figcaption>
+          </figure>
+            </div>
+          </section>
+
+          <section id="judgment" class="case-section">
+            <h2>Judgment before documents</h2>
+            <p>Most AI writing tools start drafting immediately. GetMeAJob does the thinking first, the way a good recruiter or career coach would:</p>
+            <ul class="bullets">
+              <li><strong>An honest fit analysis.</strong> Requirement-by-requirement matching with cited evidence, plus separate recruiter, hiring-manager and ATS views. Guardrails, such as a role that can't offer sponsorship the applicant needs, stop the process with "do not apply."</li>
+              <li><strong>Research with sources.</strong> Each finding about the employer is labeled as fact or interpretation and linked to where it came from.</li>
+              <li><strong>A strategy.</strong> The positioning, what to emphasize, likely objections, and which keywords can't honestly be claimed.</li>
+            </ul>
+            <p class="gallery-note">Screenshots show a fictional applicant and simulated AI output. Any scores shown come from test data, not real-world results.</p>
+            <div class="gallery">
+              <figure class="plate">
+            <button class="plate__open" type="button" data-lightbox="../assets/img/getmeajob/02-fit-analysis-full.webp" data-lightbox-alt="Full screenshot: Fit analysis page with dimension scores, three reviewer views and a requirements table." data-lightbox-caption="An honest fit analysis. Full screenshot. Fictional applicant and simulated AI output.">
+              <img src="../assets/img/getmeajob/02-fit-analysis-focus-900.webp" srcset="../assets/img/getmeajob/02-fit-analysis-focus-900.webp 900w, ../assets/img/getmeajob/02-fit-analysis-focus-1600.webp 1600w" sizes="(min-width: 1000px) 440px, 100vw"
+                   width="1600" height="1427" loading="lazy" decoding="async" alt="Fit analysis page with dimension scores, three reviewer views and a requirements table.">
+              <span class="plate__hint">View full screenshot</span>
+            </button>
+            <figcaption><span class="fig">Fig. 6</span> <strong>An honest fit analysis.</strong> Requirement-by-requirement matching with cited evidence, plus separate recruiter, hiring-manager and ATS views.</figcaption>
+          </figure>
+              <figure class="plate">
+            <button class="plate__open" type="button" data-lightbox="../assets/img/getmeajob/06-company-research-full.webp" data-lightbox-alt="Full screenshot: Company research findings with type labels and source links." data-lightbox-caption="Research with sources. Full screenshot. Fictional applicant and simulated AI output.">
+              <img src="../assets/img/getmeajob/06-company-research-focus-900.webp" srcset="../assets/img/getmeajob/06-company-research-focus-900.webp 900w, ../assets/img/getmeajob/06-company-research-focus-1600.webp 1600w" sizes="(min-width: 1000px) 440px, 100vw"
+                   width="1600" height="1304" loading="lazy" decoding="async" alt="Company research findings with type labels and source links.">
+              <span class="plate__hint">View full screenshot</span>
+            </button>
+            <figcaption><span class="fig">Fig. 7</span> <strong>Research with sources.</strong> Each finding is labeled Fact or Interpretation and linked to its sources.</figcaption>
+          </figure>
+            </div>
+            <div class="gallery gallery--single">
+              <figure class="plate">
+            <button class="plate__open" type="button" data-lightbox="../assets/img/getmeajob/03-application-strategy-full.webp" data-lightbox-alt="Full screenshot: Application strategy page with positioning statement, emphasis lists and keyword decisions." data-lightbox-caption="Strategy before documents. Full screenshot. Fictional applicant and simulated AI output.">
+              <img src="../assets/img/getmeajob/03-application-strategy-focus-900.webp" srcset="../assets/img/getmeajob/03-application-strategy-focus-900.webp 900w, ../assets/img/getmeajob/03-application-strategy-focus-1600.webp 1600w" sizes="(min-width: 1000px) 440px, 100vw"
+                   width="1600" height="1508" loading="lazy" decoding="async" alt="Application strategy page with positioning statement, emphasis lists and keyword decisions.">
+              <span class="plate__hint">View full screenshot</span>
+            </button>
+            <figcaption><span class="fig">Fig. 8</span> <strong>Strategy before documents.</strong> Positioning, what to lead with and play down, objections to expect, and keywords that can't honestly be claimed.</figcaption>
+          </figure>
+            </div>
+          </section>
+
+          <section id="real-use" class="case-section">
+            <h2>What happened when I used it for real</h2>
+            <p>On October 7 and 8, 2026, I ran GetMeAJob on my own job search, using the Anthropic API and my real resumes. It merged 8 resumes into one profile, I answered 40 follow-up questions, and two real applications went all the way from research to approved, exported documents. The app's own log records 70 successful AI calls, which it estimated cost about $5.</p>
+            <p>It also hit a genuine limit. The API rejected the largest output formats (for resume extraction, job analysis and strategy) as too complex. Five steps were switched to describing the required format in the prompt instead, while still validating every response, and every later call for those steps succeeded. That change briefly broke the automated tests; it was fixed on October 26, along with a new test that fails if the workaround is ever removed.</p>
+            <p><strong>What this doesn't show.</strong> I haven't yet evaluated the quality of the documents it produced, and nobody else has used it. The screenshots on this page come from a separate test run with a fictional applicant and simulated AI responses, not from my live applications.</p>
+          </section>
+
+          <section id="status" class="case-section">
+            <h2>Status and limitations</h2>
+            <p>Phase 1, the core application engine, is built and runs on my computer. As of October 26, 2026, all 23 of its automated tests pass. Four more phases are planned but not built: job discovery, interview preparation, assisted form-filling with approval, and learning from outcomes.</p>
+            <div class="gallery gallery--single" style="max-width:560px">
+              <figure class="plate">
+            <button class="plate__open" type="button" data-lightbox="../assets/img/getmeajob/08-roadmap-full.webp" data-lightbox-alt="Full screenshot: In-app roadmap with Phase 1 available and Phases 2 to 5 planned." data-lightbox-caption="Phased roadmap. Full screenshot. Fictional applicant and simulated AI output.">
+              <img src="../assets/img/getmeajob/08-roadmap-focus-900.webp" srcset="../assets/img/getmeajob/08-roadmap-focus-900.webp 900w, ../assets/img/getmeajob/08-roadmap-focus-1600.webp 1584w" sizes="(min-width: 1000px) 440px, 100vw"
+                   width="1584" height="2304" loading="lazy" decoding="async" alt="In-app roadmap with Phase 1 available and Phases 2 to 5 planned.">
+              <span class="plate__hint">View full screenshot</span>
+            </button>
+            <figcaption><span class="fig">Fig. 9</span> <strong>Phased roadmap.</strong> Phase 1 (the application engine) is built; job discovery, interview prep, assisted applications and outcome learning are planned.</figcaption>
+          </figure>
+            </div>
+            <h3>Limitations, stated plainly</h3>
+            <ul class="bullets">
+              <li>The quality of its live output hasn't been evaluated.</li>
+              <li>It's a single-user prototype that runs locally. It isn't deployed or hosted, and it isn't ready to serve other users.</li>
+              <li>The automatic tool check uses a fixed list of about 60 common tools, so an unlisted tool could slip through.</li>
+              <li>No live AI test has been run since a library upgrade on October 26. The automated tests, which use simulated AI responses, pass.</li>
+            </ul>
+            <div class="feature__links">
+              <a class="button button--primary" href="https://github.com/aaronlysaghtwalsh/GetMeAJob" rel="noopener">View the code on GitHub</a>
+              <span class="table-note">Code written by Claude. Public to view; all rights reserved.</span>
+            </div>
+            <a class="next-link" href="../harris-group/"><span>Next project</span><strong>Harris Group: turning automotive data into business insight</strong></a>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <p class="site-footer__name">Aaron Lysaght Walsh <span>Chicago, IL</span></p>
+      <ul class="site-footer__links">
+        <li><a href="mailto:ajlw02@icloud.com">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/aaron-lysaght-walsh" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/aaronlysaghtwalsh" rel="noopener">GitHub</a></li>
+      </ul>
+      <p class="site-footer__credit">Site designed and developed with Claude. © 2026</p>
+    </div>
+  </footer>
+
+  <dialog class="lightbox" aria-label="Full-size image">
+    <form method="dialog" class="lightbox__bar">
+      <p class="lightbox__caption"></p>
+      <button class="lightbox__close" type="submit">Close</button>
+    </form>
+    <div class="lightbox__scroll">
+      <img class="lightbox__img" src="" alt="">
+    </div>
+  </dialog>
+
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>
