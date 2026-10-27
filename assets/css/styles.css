@@ -65,7 +65,7 @@
   --gutter: clamp(20px, 5vw, 48px);
   --max: 1200px;
   --measure: 36rem;
-  --space-section: clamp(72px, 9vw, 144px);
+  --space-section: clamp(64px, 7.5vw, 112px);
   --radius-plate: 6px;
   --radius-control: 3px;
 }
@@ -209,7 +209,7 @@ strong { font-weight: 500; }
 .feature {
   display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(24px, 4vw, 56px);
   align-items: start;
-  padding-block: clamp(48px, 6vw, 88px);
+  padding-block: clamp(48px, 5vw, 72px);
   border-top: 1px solid var(--rule);
 }
 .feature:first-of-type { border-top: 0; padding-top: 0; }
@@ -223,8 +223,10 @@ strong { font-weight: 500; }
 .feature--ucd .feature__text { grid-column: 7 / -1; }
 
 .feature__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: var(--step--1); color: var(--graphite); margin-bottom: 18px; }
-.feature__title { font-size: var(--step-2); line-height: 1.18; margin-bottom: 20px; }
-.feature--lead .feature__title { font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.375rem); }
+.feature__title { margin-bottom: 22px; }
+/* Project name first, then its one-line description, so the three projects scan as a set */
+.feature__name { display: block; font-size: clamp(1.875rem, 1.4rem + 1.6vw, 2.5rem); line-height: 1.08; letter-spacing: -0.015em; }
+.feature__tagline { display: block; margin-top: 10px; font-size: clamp(1.1875rem, 1rem + 0.5vw, 1.375rem); line-height: 1.3; color: var(--graphite); max-width: 28ch; }
 .feature__links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 28px; }
 
 .facts { margin: 24px 0 0; display: grid; gap: 10px; border-top: 1px solid var(--rule); padding-top: 18px; }
@@ -234,16 +236,34 @@ strong { font-weight: 500; }
 
 /* 9. Plates & figures */
 .plate { background: var(--plate); border-radius: var(--radius-plate); padding: clamp(14px, 1.8vw, 22px); margin: 0; }
-.plate img { border-radius: 3px; border: 1px solid var(--rule); }
+.plate img { border-radius: 3px; border: 1px solid var(--rule); transition: border-color 0.15s ease; }
 .plate__open {
   position: relative; display: block; width: 100%; padding: 0; border: 0; background: none;
   cursor: zoom-in; border-radius: 3px; color: inherit; font: inherit;
 }
+/* Quiet "Enlarge" control in the corner instead of a heavy dark badge over the content */
 .plate__hint {
-  position: absolute; right: 10px; bottom: 10px;
-  font-size: 0.8125rem; font-weight: 500; color: var(--paper); background: var(--ink);
-  padding: 6px 10px; border-radius: var(--radius-control); opacity: 0.88;
+  position: absolute; right: 10px; top: 10px;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.75rem; font-weight: 500; line-height: 1; color: var(--ink);
+  background: color-mix(in srgb, var(--paper) 94%, transparent); border: 1px solid var(--rule);
+  padding: 6px 9px; border-radius: 999px;
+  transition: border-color 0.15s ease, color 0.15s ease;
 }
+.plate__hint svg { width: 12px; height: 12px; flex: none; }
+.plate__open:hover img, .plate__open:focus-visible img { border-color: color-mix(in srgb, var(--ink) 35%, var(--rule)); }
+.plate__open:hover .plate__hint, .plate__open:focus-visible .plate__hint { border-color: var(--green); color: var(--green); }
+/* Mouse and keyboard: reveal the control on hover/focus so it never sits over the interface at rest.
+   Touch screens: show it below the image instead of on top of it. */
+@media (hover: hover) and (pointer: fine) {
+  .plate__hint { opacity: 0; transition: opacity 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+  .plate__open:hover .plate__hint, .plate__open:focus-visible .plate__hint { opacity: 1; }
+}
+@media (hover: none), (pointer: coarse) {
+  .plate__hint { position: static; margin: 10px 0 0 auto; width: fit-content; display: flex; }
+}
+/* Homepage detail crop: fade the cut edge so the crop reads as deliberate */
+.plate--detail img { -webkit-mask-image: linear-gradient(to right, transparent 0, #000 56px); mask-image: linear-gradient(to right, transparent 0, #000 56px); border-left-color: transparent; }
 .plate figcaption { margin-top: 14px; font-size: 0.875rem; line-height: 1.5; color: var(--graphite); max-width: 40rem; }
 .plate figcaption strong { color: var(--ink); }
 .fig { font-family: var(--font-mono); font-size: 0.75rem; color: var(--green); margin-right: 4px; }
@@ -344,11 +364,19 @@ strong { font-weight: 500; }
 .placeholder .button { margin-top: 20px; }
 
 /* 14b. Inner pages: case studies, About, Contact */
-.page-hero { padding-top: clamp(40px, 6vw, 88px); padding-bottom: clamp(40px, 5vw, 72px); }
-.page-hero .feature__meta { margin-bottom: 22px; }
+/* Page header sits on the same two-column grid as the content below:
+   status and project type in the margin, title and introduction in the main column */
+.page-hero {
+  display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  column-gap: clamp(32px, 5vw, 72px); align-items: start;
+  padding-top: clamp(40px, 6vw, 88px); padding-bottom: clamp(40px, 5vw, 72px);
+}
+.page-hero__aside { padding-top: 14px; }
+.page-hero__aside .feature__meta { flex-direction: column; align-items: flex-start; gap: 10px; margin: 0; }
+.page-hero__main { min-width: 0; }
 .page-hero h1 {
-  font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4rem); font-weight: 380; line-height: 1.04;
-  letter-spacing: -0.02em; max-width: 20ch; margin-bottom: 24px;
+  font-size: clamp(2.25rem, 1.4rem + 3vw, 3.75rem); font-weight: 380; line-height: 1.05;
+  letter-spacing: -0.02em; max-width: 22ch; margin-bottom: 24px;
 }
 .page-hero__lede { font-size: var(--step-1); line-height: 1.55; max-width: 42rem; }
 .page-hero__lede p { margin-bottom: 0.8em; }
@@ -422,9 +450,11 @@ strong { font-weight: 500; }
 /* Galleries */
 .gallery-note { display: flex; gap: 10px; align-items: baseline; font-size: 0.875rem; color: var(--ink); margin-top: 24px; }
 .gallery-note::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); transform: translateY(-1px); }
-.gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+/* One screenshot per row, cropped to the point each caption makes, so the interface text stays readable */
+.gallery { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
 .gallery .plate { margin: 0; }
 .gallery--single { grid-template-columns: 1fr; }
+.plate--narrow { max-width: 620px; }
 .figure-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 .figure-pair .plate--figure img { width: auto; max-height: 420px; }
 .plate--chart { display: grid; justify-items: center; }
@@ -454,11 +484,15 @@ strong { font-weight: 500; }
 .next-link:hover strong { color: var(--green); }
 
 /* Contact page */
-.contact-page { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(40px, 6vw, 96px); padding-bottom: var(--space-section); border-top: 1px solid var(--rule); padding-top: 40px; }
+.contact-page { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: clamp(32px, 5vw, 72px); padding-bottom: var(--space-section); border-top: 1px solid var(--rule); padding-top: 40px; }
 .contact-page h2 { font-size: var(--step-2); margin-bottom: 16px; }
 
 @media (max-width: 1000px) {
   .case { grid-template-columns: 1fr; }
+  .page-hero { grid-template-columns: 1fr; }
+  .page-hero__aside { padding-top: 0; margin-bottom: 20px; }
+  .page-hero__aside .feature__meta { flex-direction: row; align-items: center; }
+  .page-hero__aside:empty { display: none; }
   .case__rail { position: static; padding-top: 28px; padding-bottom: 8px; }
   .rail-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
   .rail-nav { display: none; }
